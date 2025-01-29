@@ -4,14 +4,17 @@
   "description": "A comprehensive, user-friendly course selling platform designed to connect educators and learners. This app empowers educators to monetize their knowledge while providing learners with access to high-quality courses across various domains.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.9.5"
+    "mongoose": "^8.9.5",
+    "nodemon": "^3.1.9"
   }
 }
