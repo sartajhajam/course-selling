@@ -2,7 +2,7 @@ const { Router } = require('express');
 const userRouter = Router();
 const {userModel} = require('../db');
 const jwt = require('jsonwebtoken');
-const JWT_USER_PASSWORD = "asasa";
+const {JWT_USER_PASSWORD} = require('../routes/config');
 
 // Signup route
 userRouter.post("/signup", async function (req, res) {

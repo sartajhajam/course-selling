@@ -5,7 +5,9 @@ const adminRouter = Router();
 const { adminModel } = require('../db');
 
 const jwt = require('jsonwebtoken');
-JWT_ADMIN_PASSWORD = "admin";
+const { JWT_ADMIN_PASSWORD } = require('../routes/config');
+const { adminMiddleware } = require('../middleware/admin');
+
 
 // brcypt , zod ,jsoneweb token
 
@@ -55,9 +57,21 @@ adminRouter.post("/signin", async function (req, res) {
 });
 
 
-adminRouter.post("/course", function (req, res) {
+adminRouter.post("/course",adminMiddleware, async function (req, res) {
+    
+    const { title, description,imageUrl, price } = req.body;
+
+    await courseModel.create({
+        title: title,
+        description: description,
+        imageUrl: imageUrl,
+        price: price,
+        creatorId: adminId
+    });
+
     res.json({
-        message: "course purchase endpoint"
+        message: "course  created ",
+        courseId: course._id
     });
 });
 

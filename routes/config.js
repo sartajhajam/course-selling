@@ -1,0 +1,8 @@
+const JWT_USER_PASSWORD = "asasa";
+const JWT_ADMIN_PASSWORD = "admin";
+
+
+module.exports = {
+    JWT_USER_PASSWORD: JWT_USER_PASSWORD,
+    JWT_ADMIN_PASSWORD: JWT_ADMIN_PASSWORD
+}
