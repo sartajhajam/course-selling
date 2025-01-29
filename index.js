@@ -1,10 +1,12 @@
 const express = require('express');
+const mongoose = require('mongoose');
+
+// Routes
 const { userRouter } = require('./routes/user');
 const { courseRouter } = require('./routes/course');
 const { adminRouter } = require('./routes/admin');
-
 const app = express();
-const mongoose = require('mongoose');
+
 
 // Middleware to parse JSON bodies
 //app.use(express.json());
@@ -15,7 +17,11 @@ app.use("/api/v1/admin",adminRouter);
 app.use("api/v1/course", courseRouter);
 
 
-// Start the server
-app.listen(3000, () => {
-  console.log('Server is running on port 3000');
-});
+// Start the server and awit the db connection
+async function  main(){
+    mongoose.connect(" Your URL HERE FOR DB CONNECTION")
+    app.listen(3000);
+    console.log("Connected to MongoDB");
+}
+main();
+
