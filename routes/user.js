@@ -3,6 +3,7 @@ const userRouter = Router();
 const {userModel} = require('../db');
 const jwt = require('jsonwebtoken');
 const {JWT_USER_PASSWORD} = require('../routes/config');
+const { userMiddleware } = require('../middleware/user');
 
 // Signup route
 userRouter.post("/signup", async function (req, res) {
@@ -51,9 +52,14 @@ userRouter.post("/signin", async function (req, res) {
 });
 
 // Course purchase route
-userRouter.get("/purchases", function (req, res) {
+userRouter.get("/purchases",userMiddleware,async function (req, res) {
+    const userId = req.userId;
+    const purchases = await purchaseModel.find({
+        userId: userId
+    });
+
     res.json({
-        message: "course purchase endpoint"
+       purchases: purchases
     });
 });
 
