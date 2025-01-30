@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const adminRouter = Router();
 
-const { adminModel } = require('../db');
+const { adminModel, courseModel } = require('../db');
 
 const jwt = require('jsonwebtoken');
 const { JWT_ADMIN_PASSWORD } = require('../routes/config');
@@ -75,16 +75,41 @@ adminRouter.post("/course",adminMiddleware, async function (req, res) {
     });
 });
 
-adminRouter.put("/course", function (req, res) {
+adminRouter.put("/course",adminMiddleware,async function (req, res) {
+   const adminId = req.userId;
+
+   const { title, description,imageUrl, price } = req.body;
+
+   // creating  a web3 saas in 6 bours  from youtube
+   const course = await courseModel.updateOne({
+       _id: courseId,
+       creatorId: adminId
+   }, {
+       title: title,
+       description: description,
+       imageUrl: imageUrl,
+       price: price,
+       creatorId: adminId
+   });
+   
     res.json({
-        message: "add new courses"
+        message: "course updated",
+        courseId: course._id
     });
 });
 
 
-adminRouter.get("/course/bulk", function (req, res) {
+adminRouter.get("/course/bulk",adminMiddleware,async  function (req, res) {
+    const adminId = req.userId;
+
+    const courses = await courseModel.find({
+        creatorId: adminId
+    });
+    
+    
     res.json({
-        message: "get all the courses"
+        message: "courses updated",
+        courses: courses
     });
 });
 
