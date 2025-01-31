@@ -5,7 +5,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 const userSchema = new Schema({
    
-    email : {type,String, unique: true},
+    email : {type : String, unique: true},
     password : String,
     firstName : String,
     lastName : String,
@@ -13,7 +13,7 @@ const userSchema = new Schema({
 
 const adminSchema = new Schema({
   
-    email : {type,String, unique: true},        
+    email : {type: String, unique: true},        
     password : String,
     firstName : String,
     lastName : String,
